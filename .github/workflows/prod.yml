@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 16.3.0
       - name: Install
@@ -22,7 +22,7 @@ jobs:
           test/specs/android/add-note-screen.spec.js
       - name: Upload logs if failed
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: logs
-          path: logs
+          path: logs    git commit --amend --reset-author
