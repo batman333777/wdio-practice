@@ -27,11 +27,11 @@ export const config = {
   //
   specs: ["../test/specs/android/*/*.e2e.js"],
 
-  suites: {
-    chatSuite: ["../test/specs/android/chatSuite/*.e2e.js"],
-    socialSuite: ["../test/specs/android/socialSuite/*.e2e.js"],
-    userProfilesSuite: ["../test/specs/android/userProfilesSuite/*.e2e.js"]
-  },
+//   suites: {
+//     chatSuite: ["../test/specs/android/chatSuite/*.e2e.js"],
+//     socialSuite: ["../test/specs/android/socialSuite/*.e2e.js"],
+//     userProfilesSuite: ["../test/specs/android/userProfilesSuite/*.e2e.js"]
+//   },
 
   exclude: [
     // 'path/to/excluded/files'
@@ -146,11 +146,7 @@ export const config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: [['allure', {
-    outputDir: './allure-results-android',
-    disableWebdriverStepsReporting: true,
-    disableWebdriverScreenshotsReporting: false,
-  }]],
+  reporters: [],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -296,28 +292,7 @@ export const config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
-    console.log('Test run complete! Exit code:', exitCode);
-
-    const platform = capabilities[0]?.platformName?.toLowerCase() || 'unknown';
-    const reportDir = platform === 'ios' ? './allure-results-ios' : './allure-results-android';
-
-    if (fs.existsSync(reportDir)) {
-      console.log(`Allure results for ${platform} are available at: ${reportDir}`);
-    } else {
-      console.log(`No Allure results found for ${platform}`);
-      return;
-    }
-
-    // Generate the Allure report automatically
-    try {
-      execSync(`npx allure generate ${reportDir} --clean -o ./allure-report-${platform}`, { stdio: 'inherit' });
-      console.log(`Allure report generated at ./allure-report-${platform}`);
-    } catch (error) {
-      console.error('Failed to generate Allure report:', error.message);
-    }
-
-  },
+  onComplete: function () {},
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session
